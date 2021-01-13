@@ -39,13 +39,13 @@
     4、muted：静音
     5、loop：音频结尾自动回到视频开始的地方
   
-4、浏览器怎么对html5的离线储存资源进行管理和加载的呢，工作原理是什么呢？
+4、浏览器怎么对html5的离线储存资源进行管理和加载的呢，工作原理是什么呢？https://blog.csdn.net/nideshijian/article/details/53065292
   html5带来的cache manifest可以对离线储存资源进行管理和加载，
   
   如何管理和加载的：
-  在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。
-  离线的情况下，浏览器就直接使用离线存储的资源。
-  
+  在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访
+  问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，
+  那么就会重新下载文件中的资源并进行离线存储。离线的情况下，浏览器就直接使用离线存储的资源。
   
   具体使用方法如下：
   1、页面头部加入一个manifest属性；
@@ -140,8 +140,51 @@
   4、link支持使用js控制DOM去更改样式，而@import则不支持。
   
 19、如何实现浏览器内多个标签页之间的通信?
-webSocket，SharedWorker
+  webSocket，SharedWorker
 
+20、history API：可以在不刷新页面的前提下，动态改变浏览器地址栏的URL地址，动态修改页面上显示的资源；
+  window.history方法和属性：
+  方法：back(), forward(), go()
+  属性：length
+  window.history.go(1), window.history.go(-1);
+  window.history.back(),window.history.forward();
+  
+  html5中的新方法：
+  pushState(state, title, url)：添加一条历史记录，不刷新页面
+  replaceState(state, title, url)：替换当前的历史记录，不刷新页面
+  
+  state：指定网址相关的状态对象，popstate事件触发的时候，该对象会传入回调函数中，如果不需要这个对象可以置为null；
+  title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。
+  url：新页面的url地址，必须和前一个页面处于同域。浏览器的地址栏将会显示这个地址。
+  
+  事件：
+  popstate：历史记录发生改变的时候触发，pushState和replaceState不会触发；
+  hashchange：当页面的hash值发生改变的时候触发
+  
+21、Geolocation
+  API：
+  getCurrentPosition:
+        navigator.geolocation.getCurrentPosition(function (p) {
+            alert(p.coords.latitude + '---' + p.coords.longitude)
+        }, function (error) {
+            console.log(error)
+        }, {
+            enableHighAccuracy: false,
+            timeout: 1000
+        })
+  watchPosition:
+    const watchId = navigator.geolocation.getCurrentPosition(function (p) {
+            alert(p.coords.latitude + '---' + p.coords.longitude)
+        }, function (error) {
+            console.log(error)
+        }, {
+            enableHighAccuracy: false,
+            timeout: 1000
+        })
+  clearWatch:
+    cleaWatch(watchId)
+    
+22、video，audio：// 自定义的视频播放器
 
-
+23、canvas：//基础的canvas api用法
 
